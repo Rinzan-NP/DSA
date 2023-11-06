@@ -81,7 +81,7 @@ class LinkedList():
                 seen_data.add(val.next.data)
                 val = val.next
 
-    def in_reverse(self):
+    def in_reverse_printing(self):
         val = self.head
         stack = []
         while val:
@@ -89,15 +89,22 @@ class LinkedList():
             val = val.next
         while stack:
             print(stack.pop(),end="  ")
+
+    
+    def reverse(self):
+        prev = None
+        current = self.head
+
+        while current:
+            next = current.next
+            current.next = prev
+            prev = current
+            current = next
+
+            return prev
         
         
 
 llist = LinkedList()
 llist.insert_by_list([1,2,2,4,5])
-print("----------------------")
-llist.display()
-print("---------------------")
-llist.remove_duplicates()
-llist.display()
-print("---------------------")
-llist.in_reverse()
+llist.revesrse()
