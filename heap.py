@@ -125,16 +125,16 @@ class MaxHeap:
         return root
 
     def heapify(self, index):
-        smallest = index
+        largest = index
         left_child = self.get_left_child(index)
         right_child = self.get_right_child(index)
-        if self.has_left_child(index) and self.heap[smallest] < self.heap[left_child]:
-            smallest = left_child
-        if self.has_right_child(index) and self.heap[smallest] < self.heap[right_child]:
-            smallest = right_child
-        if smallest != index:
-            self.heap[index], self.heap[smallest] = self.heap[smallest], self.heap[index]
-            self.heapify(smallest)
+        if self.has_left_child(index) and self.heap[largest] < self.heap[left_child]:
+            largest = left_child
+        if self.has_right_child(index) and self.heap[largest] < self.heap[right_child]:
+            largest = right_child
+        if largest != index:
+            self.heap[index], self.heap[largest] = self.heap[largest], self.heap[index]
+            self.heapify(largest)
 
     def build_heap(self, elements):
         self.heap = elements

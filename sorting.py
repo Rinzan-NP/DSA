@@ -76,7 +76,7 @@ def quick_sort(nums, first, last):
         quick_sort(nums, right +  1, len(nums) - 1)
     return nums
 
-a = [3, 4, 1, 5, 7]
+
 
 # bubble = bubble_sort(a)
 # selection = selection_sort(a)
@@ -90,19 +90,18 @@ a = [3, 4, 1, 5, 7]
 # print(f"Quick sort : {quick}")
 
 def heapify(arr, n, i):
-    largest = i
+    smallest = i
     l = 2 * i + 1
     r = 2 * i + 2
+    if l < n and arr[i] > arr[l]:
+        smallest = l
 
-    if l < n and arr[i] < arr[l]:
-        largest = l
+    if r < n and arr[smallest] > arr[r]:
+        smallest = r
 
-    if r < n and arr[largest] < arr[r]:
-        largest = r
-
-    if largest != i:
-        arr[i], arr[largest] = arr[largest], arr[i]
-        heapify(arr, n, largest)
+    if smallest != i:
+        arr[i], arr[smallest] = arr[smallest], arr[i]
+        heapify(arr, n, smallest)
 
 def heapSort(arr):
     n = len(arr)
@@ -114,3 +113,7 @@ def heapSort(arr):
         arr[i], arr[0] = arr[0], arr[i]
         heapify(arr, i, 0)
 
+    return arr
+
+a = ["Ant", "Bat", "Cat", "Dog"]
+print(f"After heap sort (desc) : {heapSort(a)}")

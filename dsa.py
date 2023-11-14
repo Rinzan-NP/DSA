@@ -56,3 +56,26 @@ def quick_sort(nums, start, end):
 a = [5, 4, 2, 3, 1]
 quick_sorted = quick_sort(a, 0, len(a)- 1)
 print(quick_sorted)
+
+def heapify(nums, index, end):
+    l, r = 2 * index + 1, 2 * index + 2
+    largest = index
+    if l < end and nums[l] > nums[largest]:
+        largest = l
+    if r < end and nums[r] > nums[largest]:
+        largest = r
+    if largest != index:
+        nums[largest], nums[index] = nums[index], nums[largest]
+        heapify(nums, largest, end)
+
+
+def heap_sort(nums):
+    n = len(nums) 
+
+    for i in range(n//2 - 1, -1, -1):
+        heapify(nums, i, n )
+    
+    for i in range(n-1, 0, -1):
+        nums[i], nums[0] = nums[0], nums[i]
+        heapify(nums, 0, i)
+    return nums
