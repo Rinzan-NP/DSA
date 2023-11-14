@@ -31,7 +31,6 @@ def merge_sort_desc(nums):
         return nums
 
 
-
 def pivot_place(nums, start, end):
     pivot = nums[start]
     i = start + 1
