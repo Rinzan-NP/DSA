@@ -63,6 +63,43 @@ class BinaryTreeSearchTree:
             elements += self.right.in_order_traversal()
         return elements
     
+
+    def pre_order_traversal(self):
+        elements = []
+        elements.append(self.data)
+        if self.left:
+            elements += self.left.in_order_traversal()
+        if self.right:
+            elements += self.right.in_order_traversal()
+        return elements 
+    
+    def post_order_traversal(self):
+        elements = []
+        if self.left:
+            elements += self.left.in_order_traversal()
+        if self.right:
+            elements += self.right.in_order_traversal()
+        elements.append(self.data)
+        return elements
+
+    def find_closest(self, target):
+        closest = 100000000
+        current  = self
+        while current is not None:
+            if abs(closest - target) > abs(current.data - target):
+                closest = current.data
+            if target > closest:
+                current = current.right
+            elif target < closest:
+                current = current.left
+            else:
+                break
+        return closest
+    
+
+
+
+
 node = BinaryTreeSearchTree(20)
 node.add_child(17)
 node.add_child(4)
@@ -70,8 +107,7 @@ node.add_child(23)
 node.add_child(18)
 node.add_child(34)
 node.add_child(22)
+print(node.find_closest(3))
 print(node.in_order_traversal())
 
-
-    
         

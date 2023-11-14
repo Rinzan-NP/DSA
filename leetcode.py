@@ -1,5 +1,5 @@
-# def binary_search(nums : list, target : int) -> int:
 #     i, j = 0, len(nums) - 1
+# def binary_search(nums : list, target : int) -> int:
 #     while i <= j:
 #         mid = (i + j)//2
 #         if nums[mid] < target:
@@ -18,3 +18,4 @@
 
 # s = "32"
 # print(s.isnumeric())
+print(abs(500-85))
