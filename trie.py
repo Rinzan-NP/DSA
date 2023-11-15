@@ -45,6 +45,11 @@ class Trie:
         
         return False
     
+    def add_suffix(self , word):
+        for i in range(len(word)):
+            s_word = word[i:]
+            self.add(s_word)
+
 trie = Trie()
 print("Searching apple in trie : " + str({trie.search("apple")}))
 trie.add("apple")
