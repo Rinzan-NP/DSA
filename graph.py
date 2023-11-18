@@ -1,4 +1,5 @@
 from collections import deque
+import heapq
 class Graph:
     def __init__(self) -> None:
         self.graph = {}
@@ -77,17 +78,63 @@ class Graph:
         return visited
 
 
-graph = Graph()
+# graph = Graph()
 
-graph.add(1, 3, uni = True)
-graph.add(2, 3, uni = True)
-graph.add(2, 4, uni = True)
-graph.add(3, 4, uni = True)
-graph.add(5,6)
-graph.add(2,6)
-start = 1
-end = 4
-print(graph.graph)
-print(graph.breadth_first_search(1))
+# graph.add(1, 3, uni = True)
+# graph.add(2, 3, uni = True)
+# graph.add(2, 4, uni = True)
+# graph.add(3, 4, uni = True)
+# graph.add(5,6)
+# graph.add(2,6)
+# start = 1
+# end = 4
+# print(graph.graph)
+# print(graph.breadth_first_search(1))
+
+"""Weighted graph"""
+
+class WeightedGraph:
+    def __init__(self) -> None:
+        self.graph = {}
+
+    def add(self, vertex, edge, weight):
+        if vertex not in self.graph:
+            self.graph[vertex] = {}
+        if edge not in self.graph:
+            self.graph[edge] = {}
+        self.graph[vertex][edge] = weight
+
+    def dijkstra(self, start, end):
+        priority_queue = [(0, start)]
+        distances = {vertex: float('infinity') for vertex in self.graph}
+        distances[start] = 0
+        previous_vertex = {vertex: None for vertex in self.graph}
+
+        while priority_queue:
+            current_distance, current_vertex = heapq.heappop(priority_queue)
+
+            if current_distance > distances[current_vertex]:
+                continue
+
+            for neighbor, weight in self.graph[current_vertex].items():
+                distance = current_distance + weight
+
+                if distance < distances[neighbor]:
+                    distances[neighbor] = distance
+                    previous_vertex[neighbor] = current_vertex
+                    heapq.heappush(priority_queue, (distance, neighbor))
+
+        shortest_path = []
+        current_vertex = end
+
+        while previous_vertex[current_vertex] is not None:
+            shortest_path.insert(0, current_vertex)
+            current_vertex = previous_vertex[current_vertex]
+
+        shortest_path.insert(0, start)
+
+        return shortest_path, distances[end]
+    
+g = WeightedGraph()
 
 

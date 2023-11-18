@@ -1,3 +1,4 @@
+import heapq
 def string_last(strings ):
     splitted = strings.split()
     return splitted[-1]
@@ -53,9 +54,9 @@ def quick_sort(nums, start, end):
         quick_sort(nums, pi +  1, end)
     return nums
 
-a = [5, 4, 2, 3, 1]
-quick_sorted = quick_sort(a, 0, len(a)- 1)
-print(quick_sorted)
+# a = [5, 4, 2, 3, 1]
+# quick_sorted = quick_sort(a, 0, len(a)- 1)
+# print(quick_sorted)
 
 def heapify(nums, index, end):
     l, r = 2 * index + 1, 2 * index + 2
@@ -79,3 +80,21 @@ def heap_sort(nums):
         nums[i], nums[0] = nums[0], nums[i]
         heapify(nums, 0, i)
     return nums
+
+
+def in_order_traverse(root):
+    elements = []
+    if root.left:
+        elements +=  in_order_traverse(root.left)
+    elements.append(root.val)
+    if root.right:
+        elements += in_order_traverse(root.right)
+    return elements
+
+heap = []
+heapq.heappush(heap, 1)
+heapq.heappush(heap, 3)
+heapq.heappush(heap, 2)
+print(heap)
+print(heapq.heappop(heap))
+print(heap)

@@ -96,8 +96,16 @@ class BinaryTreeSearchTree:
                 break
         return closest
     
+"Validate  binary search tree"
 
-
+def is_vaidate(tree):
+    def isValidate(node, left, right):
+        if node is None:
+            return True
+        if not left < node.val < right:
+            return False
+        return isValidate(node.left, left, node.val) and isValidate(node.right, node.val, right)
+    return isValidate(tree, "-inf", "inf")
 
 
 node = BinaryTreeSearchTree(20)
