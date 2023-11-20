@@ -82,19 +82,55 @@ def heap_sort(nums):
     return nums
 
 
-def in_order_traverse(root):
+
+
+# heap = []
+# heapq.heappush(heap, 1)
+# heapq.heappush(heap, 3)
+# heapq.heappush(heap, 2)
+# print(heap)
+# print(heapq.heappop(heap))
+# print(heap)
+
+def validate(tree):
+    def is_validate(node, left, right):
+        if node is None:
+            return True
+        if not left < node.val < right:
+            return False
+        return is_validate(node.left, left, node.val) and is_validate(node.right, node.val, right)
+    return is_validate(tree, float('-inf'), float('inf'))
+
+def pre_order(tree):
     elements = []
-    if root.left:
-        elements +=  in_order_traverse(root.left)
-    elements.append(root.val)
-    if root.right:
-        elements += in_order_traverse(root.right)
+    elements.append(tree.val)
+    if tree.left:
+        elements += pre_order(tree.left)
+    elif tree.right:
+        elements +=  pre_order(tree.right)
     return elements
 
-heap = []
-heapq.heappush(heap, 1)
-heapq.heappush(heap, 3)
-heapq.heappush(heap, 2)
-print(heap)
-print(heapq.heappop(heap))
-print(heap)
+
+def heap_add(heap : list, val : int):
+    heap.append(val)
+    i = len(heap) - 1
+    while i != 0 and heap[(i - 1 )// 2] < heap[i]:
+        heap[i], heap[(i - 1 )// 2] = heap[(i - 1 )// 2], heap[i]
+        i = (i - 1) // 2
+
+def heapify(heap, index):
+    smallest = index
+    left = 2 * index + 1
+    right = 2 * index + 2
+    if left < len(heap) and heap[smallest] > heap[left]:
+        smallest = left
+    if right < len(heap) and heap[smallest] > heap[right]:
+        smallest = right
+    if smallest != index:
+        heap[smallest], heap[index] = heap[index], heap[smallest]
+        heapify(smallest)
+
+
+        
+
+        

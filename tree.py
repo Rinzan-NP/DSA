@@ -25,12 +25,12 @@ class TreeNode:
                 children.display()
 
 
-# node = TreeNode(10)
-# child_node = TreeNode(3)
-# child_node_2 = TreeNode(1)
-# node.add_child(child_node)
-# node.add_child(child_node_2)
-# node.display()
+node = TreeNode(10)
+child_node = TreeNode(3)
+child_node_2 = TreeNode(1)
+node.add_child(child_node)
+node.add_child(child_node_2)
+node.display()
 
 """BINARY SEARCH TREE"""
 
@@ -95,6 +95,29 @@ class BinaryTreeSearchTree:
             else:
                 break
         return closest
+    
+    def delete(self, key):
+        def find_min(node):
+            current = node
+            while current.left is not None:
+                current = current.left
+            return current
+        if self is None:
+            return self
+        if key < self.data:
+            self.left = self.left.delete(key)
+        elif key > self.data:
+            self.right = self.right.delete(key)
+        else:
+            if self.left is None:
+                return self.right
+            elif self.right is None:
+                return self.left
+            temp = find_min(self.right)
+            self.data = temp.data
+            self.right = self.right.delete(temp.data)
+
+        return self
     
 "Validate  binary search tree"
 

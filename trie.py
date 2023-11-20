@@ -53,6 +53,7 @@ class Trie:
 trie = Trie()
 print("Searching apple in trie : " + str({trie.search("apple")}))
 trie.add("apple")
+print(trie.root.children)
 print("apple added!")
 print("Searching apple in trie : " + str({trie.search("apple")}))
 trie.remove("apple")
